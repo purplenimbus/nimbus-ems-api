@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
 					->create([
 						'tenant_id' => $tenant->id,
 						'image_url' =>	'https://www.victoria147.com/wp-content/uploads/2014/10/user-avatar-placeholder.png',
-						'meta'	=> [ "user_type" => "student" , "business_unit" => "school" ]
+						//'meta'	=> [ "user_type" => "student" , "business_unit" => "school" ]
 					])
 					->each(function($user)use($tenant){
 						

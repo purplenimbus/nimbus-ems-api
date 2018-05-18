@@ -21,7 +21,7 @@ class Users extends Migration
 			$table->date('dob')->nullable();
 			$table->char('sex',1)->nullable();
             $table->string('email')->unique();
-            $table->string('address')->unique();
+            //$table->string('address')->unique();
             $table->string('password')->nullable();
 			$table->integer('tenant_id')->nullable();
 			$table->string('image_url')->nullable();

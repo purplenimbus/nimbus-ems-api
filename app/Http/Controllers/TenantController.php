@@ -99,8 +99,7 @@ class TenantController extends Controller
 	 *
      * @return Illuminate\Http\Response
      */	
-	public function saveUser(Request $request){
-		//validation
+	public function updateUser(Request $request){
 		$this->validate($request, [
 			'id' => 'required',
 			'fname' => 'required',

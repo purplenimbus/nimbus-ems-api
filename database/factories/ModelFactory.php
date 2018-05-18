@@ -13,16 +13,21 @@
 
 $factory->define(App\Tenant::class, function ($faker) {
     return [
-        'name' => $faker->company,
+        'name' => strtolower($faker->company),
     ];
 });
 
 $factory->define(App\User::class, function ($faker) {
     return [
-        'fname' => $faker->name,
-        'lname' => $faker->name,
-        'email' => $faker->email,
-        'address' => $faker->address,
+        'fname' => strtolower($faker->name),
+        'lname' => strtolower($faker->name),
+        'email' => strtolower($faker->email),
+        'meta' => [
+			'streetAddress' => strtolower($faker->streetAddress),
+			'postcode' 		=> strtolower($faker->postcode),
+			'city' 			=> 'calabar',
+			'country' 		=> 'nigeria',
+		],
 		'image_url' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQi1SYU1kgu3FtGlMpm5W7K2zuZHLgBQZzf34TQ3_Qe8LUd8s5C'
     ];
 });

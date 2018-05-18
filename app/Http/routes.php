@@ -22,7 +22,8 @@ $app->get('/', function () use ($app) {
 $app->get('tenants', 'TenantController@tenants'); //List all users for a certain tenant
 $app->get('{tenant_id}/users', 'TenantController@getUsers'); //List all users for a certain tenant
 $app->get('{tenant_id}/users/{user_id}', 'TenantController@getUser'); //List all details for a certain user
-$app->post('{tenant_id}/users/{user_id}', 'TenantController@saveUser'); 
+$app->post('{tenant_id}/users/{user_id}', 'TenantController@newUser'); 
+$app->put('{tenant_id}/users/{user_id}', 'TenantController@updateUser'); 
 //$app->get('{tenant_id}/users/{user_id}/tasks', 'TenantController@userTasks'); //List all tasks for a certain user
 //$app->get('{tenant_id}/activities/', 'TenantController@activities'); //List all activities for a certain tenant
 
