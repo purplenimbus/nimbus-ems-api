@@ -24,6 +24,10 @@ $app->get('{tenant_id}/users', 'TenantController@getUsers'); //List all users fo
 $app->get('{tenant_id}/users/{user_id}', 'TenantController@getUser'); //List all details for a certain user
 $app->post('{tenant_id}/users/{user_id}', 'TenantController@newUser'); 
 $app->put('{tenant_id}/users/{user_id}', 'TenantController@updateUser'); 
+/* Payroll */
+$app->get('{tenant_id}/payrolls/', 'PayrollController@getPayrolls'); //Get all payroll for a certain tenant
+$app->get('{tenant_id}/payrolls/{company_payroll_id}', 'PayrollController@getPayroll'); //Get a specific payroll for a certain tenant
+ 
 //$app->get('{tenant_id}/users/{user_id}/tasks', 'TenantController@userTasks'); //List all tasks for a certain user
 //$app->get('{tenant_id}/activities/', 'TenantController@activities'); //List all activities for a certain tenant
 

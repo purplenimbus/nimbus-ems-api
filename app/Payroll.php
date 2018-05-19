@@ -27,7 +27,7 @@ class Payroll extends Model implements
      * @var array
      */
     protected $fillable = [
-        'user_id','ref_id', 'meta', 'complete'
+        'user_id','amount', 'meta', 'complete'
     ];
 
     /**
@@ -36,6 +36,7 @@ class Payroll extends Model implements
      * @var array
      */
     protected $hidden = [
+		'user_id'
     ];
 	
 	
@@ -48,5 +49,10 @@ class Payroll extends Model implements
 	protected $casts = [
         'meta' => 'array',
     ];
+	
+	public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 	
 }
