@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-class ExampleController extends Controller
+class PayrollController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -14,5 +14,17 @@ class ExampleController extends Controller
         //
     }
 
-    //
+	/**
+     * Get all payroll for a tenant
+     *
+	 * @param integer $tenant_id     
+	 *
+	 * @param Illuminate\Http\Request $request
+	 *
+     * @return Illuminate\Http\Response
+     */
+	 
+	public function getPayroll($tenant_id,Request $request){
+				
+	}
 }

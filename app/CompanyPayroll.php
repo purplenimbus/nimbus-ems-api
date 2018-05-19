@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 
-class Payroll extends Model implements
+class CompanyPayroll extends Model implements
     AuthenticatableContract,
     AuthorizableContract
 {
@@ -19,7 +19,7 @@ class Payroll extends Model implements
      *
      * @var string
      */
-    protected $table = 'payroll';
+    protected $table = 'companyPayrolls';
 	
     /**
      * The attributes that are mass assignable.
@@ -27,7 +27,7 @@ class Payroll extends Model implements
      * @var array
      */
     protected $fillable = [
-        'user_id','ref_id', 'meta', 'complete'
+        'tenant_id','payroll_id', 'meta'
     ];
 
     /**

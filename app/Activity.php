@@ -13,7 +13,7 @@ class Activity extends Model implements
     AuthorizableContract
 {
     use Authenticatable, Authorizable;
-
+	
     /**
      * The attributes that are mass assignable.
      *

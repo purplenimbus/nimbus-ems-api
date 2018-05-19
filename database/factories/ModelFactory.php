@@ -85,3 +85,15 @@ $factory->define(App\Activity::class, function ($faker) {
 	
     return $data;
 });
+
+$factory->define(App\Payroll::class, function ($faker) {
+	return [
+		'amount' => 50000
+	];
+});
+
+$factory->define(App\CompanyPayroll::class, function ($faker) {
+	return [
+		
+	];
+});

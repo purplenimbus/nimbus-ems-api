@@ -5,7 +5,7 @@ use App\Employee as Employee;
 use App\Task as Task;
 use App\User as User;
 
-class TenantController extends Controller
+class UserController extends Controller
 {
     /**
      * Create a new controller instance.
