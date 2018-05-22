@@ -31,6 +31,7 @@ class Transactions extends Model implements
      * @var array
      */
     protected $hidden = [
+		'id'
     ];
 	
 	/**

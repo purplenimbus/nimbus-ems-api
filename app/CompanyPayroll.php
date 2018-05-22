@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Webpatser\Uuid\Uuid as Uuid;
+
 use Illuminate\Auth\Authenticatable;
 use Laravel\Lumen\Auth\Authorizable;
 use Illuminate\Database\Eloquent\Model;
@@ -36,6 +38,7 @@ class CompanyPayroll extends Model implements
      * @var array
      */
     protected $hidden = [
+		'id'
     ];
 	
 	
@@ -48,5 +51,16 @@ class CompanyPayroll extends Model implements
 	protected $casts = [
         'meta' => 'array',
     ];
+	
+	/**
+	 *  Setup model event hooks
+	 */
+	public static function boot()
+	{
+		parent::boot();
+		self::creating(function ($model) {
+			$model->uuid = (string) Uuid::generate(4);
+		});
+	}
 	
 }

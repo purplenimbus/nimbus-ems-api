@@ -31,7 +31,7 @@ class Tenant extends Model implements
      * @var array
      */
     protected $hidden = [
-        'password',
+        'password','id'
     ];
 	
 	/**

@@ -31,6 +31,7 @@ class Activity extends Model implements
      * @var array
      */
     protected $hidden = [
+		'id'
     ];
 	
 	/**

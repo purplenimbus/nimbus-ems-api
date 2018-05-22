@@ -38,7 +38,7 @@ class Payroll extends Model implements
      * @var array
      */
     protected $hidden = [
-		'user_id'
+		'user_id','id'
     ];
 	
 	

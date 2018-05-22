@@ -61,7 +61,7 @@ class PayrollController extends Controller
 		//do something with tenant_id ? perhaps
 		$payroll = Payroll::with('user')->where([
 					['company_payroll_id', '=', $payroll_id],
-				])->get(['id','amount','user_id']);
+				])->get(['uuid','amount','user_id']);
 								
 		if(sizeof($payroll)){
 			return response()->json($payroll,200);
