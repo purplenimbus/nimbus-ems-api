@@ -5,19 +5,21 @@ namespace App\Http\Controllers;
 use App\User as User;
 use App\Payroll as Payroll;
 use App\CompanyPayroll as CompanyPayroll;
+use Yabacon\Paystack as Paystack;
 
 use Illuminate\Http\Request;
 
 class PayrollController extends Controller
 {
-    /**
+    var $paystack;
+	/**
      * Create a new controller instance.
      *
      * @return void
      */
     public function __construct()
     {
-        //
+		$this->paystack = new Paystack(env('PAYSTACK_SECRET_KEY'));
     }
 
 	/**
@@ -31,16 +33,19 @@ class PayrollController extends Controller
      */
 	 
 	public function getPayrolls($tenant_id,Request $request){
-		
-		$payrolls = $request->has('paginate') ? CompanyPayroll::all()->paginate($request->paginate) : CompanyPayroll::all();
+		try{
+			$payrolls = $request->has('paginate') ? CompanyPayroll::all()->paginate($request->paginate) : CompanyPayroll::all();
+					
+			if(sizeof($payrolls)){
+				return response()->json($payrolls,200);
+			}else{
 				
-		if(sizeof($payrolls)){
-			return response()->json($payrolls,200);
-		}else{
+				$message = 'no payrolls found for tenant id : $tenant_id';
+				
+				return response()->json(['message' => $message],401);
+			}
+		}catch(Exception $e){
 			
-			$message = 'no payrolls found for tenant id : $tenant_id';
-			
-			return response()->json(['message' => $message],401);
 		}
 	
 	}
@@ -58,18 +63,22 @@ class PayrollController extends Controller
      */
 	 
 	public function getPayroll($tenant_id,$payroll_id){
-		//do something with tenant_id ? perhaps
-		$payroll = Payroll::with('user')->where([
-					['company_payroll_id', '=', $payroll_id],
-				])->get(['uuid','amount','user_id']);
-								
-		if(sizeof($payroll)){
-			return response()->json($payroll,200);
-		}else{
+		try{
+			//do something with tenant_id ? perhaps
+			$payroll = Payroll::with('user')->where([
+						['company_payroll_id', '=', $payroll_id],
+					])->get(['uuid','amount','user_id']);
+									
+			if(sizeof($payroll)){
+				return response()->json($payroll,200);
+			}else{
+				
+				$message = 'no payroll id: '.$payroll_id.' found for tenant id : '.$tenant_id;
+				
+				return response()->json(['message' => $message],401);
+			}
+		}catch(Exception $e){
 			
-			$message = 'no payroll id: '.$payroll_id.' found for tenant id : '.$tenant_id;
-			
-			return response()->json(['message' => $message],401);
 		}
 	
 	}
@@ -87,6 +96,17 @@ class PayrollController extends Controller
      */
 	 
 	public function batchProcessPayroll($tenant_id,$payroll_id){
+		try{
+			$payroll = Payroll::with('user')->where([
+					['company_payroll_id', '=', $payroll_id],
+			])->get(['uuid','amount','user_id']);
+			
+			var_dump($this->paystack);
+			
+		}catch(Exception $e){
+			
+		}
+		
 		
 	}
 }

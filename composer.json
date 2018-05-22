@@ -12,7 +12,8 @@
         "palanik/lumen-cors": "dev-master",
         "tymon/jwt-auth": "^0.5.12",
         "guzzlehttp/guzzle": "~6.0",
-        "webpatser/laravel-uuid": "^3.0"
+        "webpatser/laravel-uuid": "^3.0",
+        "yabacon/paystack-php": "^2.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

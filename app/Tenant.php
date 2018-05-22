@@ -22,7 +22,7 @@ class Tenant extends Model implements
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'address','meta'
+        'name','email','meta'
     ];
 
     /**
