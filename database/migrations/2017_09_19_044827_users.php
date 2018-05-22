@@ -14,6 +14,7 @@ class Users extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
 			$table->increments('id');
+			$table->uuid('uuid');
             $table->string('fname');
 			$table->string('lname');
 			$table->string('access_level');

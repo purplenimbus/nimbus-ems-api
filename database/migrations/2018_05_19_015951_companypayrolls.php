@@ -14,6 +14,7 @@ class Companypayrolls extends Migration
     {
         Schema::create('companyPayrolls', function (Blueprint $table) {
             $table->increments('id');
+			$table->uuid('uuid');
 			$table->integer('tenant_id');
 			$table->json('meta')->nullable();
             $table->timestamps();

@@ -14,6 +14,7 @@ class Tenants extends Migration
     {
         Schema::create('tenants', function (Blueprint $table) {
 			$table->increments('id');
+			$table->uuid('uuid');
 			$table->string('name');
 			$table->json('meta');
 			$table->timestamps();

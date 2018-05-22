@@ -73,4 +73,20 @@ class PayrollController extends Controller
 		}
 	
 	}
+	
+	/**
+     * Batch Process a specific payroll for a tenant
+     *
+	 * @param integer $tenant_id        
+	 *
+	 * @param integer $payroll_id     
+	 *
+	 * @param Illuminate\Http\Request $request
+	 *
+     * @return Illuminate\Http\Response
+     */
+	 
+	public function batchProcessPayroll($tenant_id,$payroll_id){
+		
+	}
 }

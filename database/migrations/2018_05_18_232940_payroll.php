@@ -19,6 +19,7 @@ class Payroll extends Migration
             $table->integer('amount');
 			$table->json('meta')->nullable();
 			$table->boolean('complete')->default(false);
+			$table->uuid('uuid');
             $table->timestamps();
         });
     }

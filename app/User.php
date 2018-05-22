@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Webpatser\Uuid\Uuid as Uuid;
+
 use Illuminate\Auth\Authenticatable;
 use Laravel\Lumen\Auth\Authorizable;
 use Illuminate\Database\Eloquent\Model;
@@ -36,6 +38,7 @@ class User extends Model implements
     {
         return $this->hasMany('App\Task');
     }
+
 	
 	/**
      * Cast meta property to array
@@ -46,5 +49,16 @@ class User extends Model implements
 	protected $casts = [
         'meta' => 'array',
     ];
+	
+	/**
+	 *  Setup model event hooks
+	 */
+	public static function boot()
+	{
+		parent::boot();
+		self::creating(function ($model) {
+			$model->uuid = (string) Uuid::generate(4);
+		});
+	}
 	
 }

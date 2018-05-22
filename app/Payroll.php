@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Webpatser\Uuid\Uuid as Uuid;
+
 use Illuminate\Auth\Authenticatable;
 use Laravel\Lumen\Auth\Authorizable;
 use Illuminate\Database\Eloquent\Model;
@@ -27,7 +29,7 @@ class Payroll extends Model implements
      * @var array
      */
     protected $fillable = [
-        'user_id','amount', 'meta', 'complete'
+        'id','user_id','amount', 'meta', 'complete'
     ];
 
     /**
@@ -54,5 +56,16 @@ class Payroll extends Model implements
     {
         return $this->belongsTo('App\User');
     }
+	
+	/**
+	 *  Setup model event hooks
+	 */
+	public static function boot()
+	{
+		parent::boot();
+		self::creating(function ($model) {
+			$model->uuid = (string) Uuid::generate(4);
+		});
+	}
 	
 }

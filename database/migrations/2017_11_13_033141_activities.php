@@ -14,6 +14,7 @@ class Activities extends Migration
     {
         Schema::create('activities', function (Blueprint $table) {
 			$table->increments('id');
+			$table->uuid('uuid');
 			$table->string('user_id');
 			$table->string('tenant_id');
 			$table->json('meta');
