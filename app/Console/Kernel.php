@@ -5,6 +5,8 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Laravel\Lumen\Console\Kernel as ConsoleKernel;
 
+use App\Jobs\ProcessPayroll;
+
 class Kernel extends ConsoleKernel
 {
     /**
@@ -24,6 +26,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        //
+        $schedule->job(new GeneratePayroll())->monthlyOn(15,'00:00');
     }
 }

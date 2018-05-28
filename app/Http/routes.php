@@ -19,7 +19,10 @@ $app->get('/', function () use ($app) {
 });
 
 /* Tenants */
-$app->get('tenants', 'TenantController@tenants'); //List all users for a certain tenant
+$app->get('tenants', 'TenantController@getTenants'); //List all users for a certain tenant
+$app->get('tenant/{tenant_id}', 'TenantController@getTenant'); //List all users for a certain tenant
+$app->put('tenants', 'TenantController@updateTenant'); 
+/* Users */
 $app->get('{tenant_id}/users', 'TenantController@getUsers'); //List all users for a certain tenant
 $app->get('{tenant_id}/users/{user_id}', 'TenantController@getUser'); //List all details for a certain user
 $app->post('{tenant_id}/users/{user_id}', 'TenantController@newUser'); 

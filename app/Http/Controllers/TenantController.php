@@ -27,7 +27,7 @@ class TenantController extends Controller
 	 *
      * @return Illuminate\Http\Response
      */
-	public function tenants(Request $request){
+	public function getTenants(Request $request){
 				
 		$tenants = $request->has('paginate') ? Tenant::all()->paginate($request->paginate) : Tenant::all();
 				
@@ -39,6 +39,30 @@ class TenantController extends Controller
 			
 			return response()->json(['message' => $message],401);
 		}
+	}
+	
+	/**
+     * Get a tenant
+     *
+	 * @param Illuminate\Http\Request $request
+	 *
+     * @return Illuminate\Http\Response
+     */
+	public function getTenant($tenant_id,Request $request){
+				
+		$tenant = Tenant::where([
+					['id', '=', $tenant_id],
+				])->get();
+								
+		if(sizeof($tenant)){
+			return response()->json($tenant,200);
+		}else{
+			
+			$message = 'no tenant found for id : '.$tenant_id;
+			
+			return response()->json(['message' => $message],401);
+		}
+		
 	}
 
 	/**
@@ -107,13 +131,9 @@ class TenantController extends Controller
 			//'email' => 'required|email|unique:users'
 		]);
 		
-		$user_id = $request->id;
+		$user = User::find($request->id);
 		
-		$data = $request->all();
-		
-		$user = User::find($user_id);
-		
-		$user->fill($data);
+		$user->fill($request->all());
 		
 		$user->save();
 		
@@ -127,8 +147,19 @@ class TenantController extends Controller
      *
      * @return Illuminate\Http\Request
      */	
-	public function saveTenant(Request $request){
-
+	public function updateTenant(Request $request){
+		$this->validate($request, [
+			'id' => 'required',
+			'name' => 'required',
+		]);
+		
+		$tenant = Tenant::find($request->id);
+		
+		$tenant->fill($request->all());
+		
+		$tenant->save();
+		
+		return response()->json($tenant,200);
 	}
 	
 	/*

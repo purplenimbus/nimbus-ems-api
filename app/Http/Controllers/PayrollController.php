@@ -6,6 +6,7 @@ use App\User as User;
 use App\Payroll as Payroll;
 use App\CompanyPayroll as CompanyPayroll;
 use Yabacon\Paystack as Paystack;
+use App\Jobs\ProcessPayroll;
 
 use Illuminate\Http\Request;
 
@@ -67,7 +68,7 @@ class PayrollController extends Controller
 			//do something with tenant_id ? perhaps
 			$payroll = Payroll::with('user')->where([
 						['company_payroll_id', '=', $payroll_id],
-					])->get(['uuid','amount','user_id']);
+					])->get(['uuid','amount','user_id','complete']);
 									
 			if(sizeof($payroll)){
 				return response()->json($payroll,200);
@@ -97,16 +98,27 @@ class PayrollController extends Controller
 	 
 	public function batchProcessPayroll($tenant_id,$payroll_id){
 		try{
-			$payroll = Payroll::with('user')->where([
-					['company_payroll_id', '=', $payroll_id],
-			])->get(['uuid','amount','user_id']);
 			
-			var_dump($this->paystack);
+			dispatch(new ProcessPayroll($payroll_id));
 			
 		}catch(Exception $e){
 			
 		}
 		
+	}
+	
+	/**
+     * Verify Bank Account
+     *
+	 * @param integer $accountNumber        
+	 *
+	 * @param Illuminate\Http\Request $request
+	 *
+     * @return Illuminate\Http\Response
+     */
+	 
+	public function verifyBank($accountNumber){
 		
 	}
+	
 }
