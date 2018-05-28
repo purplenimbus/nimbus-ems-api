@@ -7,6 +7,7 @@ use App\Payroll as Payroll;
 use App\CompanyPayroll as CompanyPayroll;
 use Yabacon\Paystack as Paystack;
 use App\Jobs\ProcessPayroll;
+use App\Jobs\GeneratePayroll;
 
 use Illuminate\Http\Request;
 
@@ -85,18 +86,35 @@ class PayrollController extends Controller
 	}
 	
 	/**
+     * Generate payroll for a tenant
+     *
+	 * @param integer $tenant_id        
+	 *
+     * @return Illuminate\Http\Response
+     */
+	 
+	public function GeneratePayroll($tenant_id){
+		try{
+			
+			dispatch(new GeneratePayroll($tenant_id));
+			
+		}catch(Exception $e){
+			
+		}
+		
+	}
+	
+	/**
      * Batch Process a specific payroll for a tenant
      *
 	 * @param integer $tenant_id        
 	 *
 	 * @param integer $payroll_id     
 	 *
-	 * @param Illuminate\Http\Request $request
-	 *
      * @return Illuminate\Http\Response
      */
 	 
-	public function batchProcessPayroll($tenant_id,$payroll_id){
+	public function ProcessPayroll($tenant_id,$payroll_id){
 		try{
 			
 			dispatch(new ProcessPayroll($payroll_id));
